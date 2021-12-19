@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using brotherscase;
 using brotherscase.Domain;
+using brotherscase.Models;
+using brotherscase.Data;
 
 namespace brotherscase.Controllers
 {
@@ -15,17 +17,20 @@ namespace brotherscase.Controllers
     public class AddressController : ControllerBase
     {
         private readonly AddressDbContext _context;
+        private readonly AddressRepository _repository;
 
         public AddressController(AddressDbContext context)
         {
             _context = context;
+            _repository = new AddressRepository(context);
         }
 
         // GET: api/Address
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Address>>> GetAddress()
+        public async Task<ActionResult<IEnumerable<Address>>> GetAddress([FromQuery] AddressParameters addressParameters)
         {
-            return await _context.Address.ToListAsync();
+            return await _repository.GetAddresses(addressParameters).ToListAsync();
+            
         }
 
         // GET: api/Address/5
