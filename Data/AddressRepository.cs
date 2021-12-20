@@ -62,7 +62,7 @@ namespace brotherscase.Data
         public IQueryable<Address> GetAddresses(AddressParameters addressParameters)
         {
 
-            // Met meer tijd zou ik hier een soort expression builder van maken die alleen de checks toevoegd aan de expression waarbij de parameter niet leeg is door middel van looping
+            // Met meer tijd zou ik hier een soort expression builder van maken die alleen de checks toevoegd aan de expression wanneer de parameter niet leeg is door middel van looping
             Expression<Func<Address, bool>> expression = o => (addressParameters.Street == null || o.Street.ToLower().Contains(addressParameters.Street.ToLower())) &&
                                                               (addressParameters.HouseNumber == 0 || o.HouseNumber == addressParameters.HouseNumber) &&
                                                               (addressParameters.PostalCode == null || o.PostalCode.ToLower().Contains(addressParameters.PostalCode.ToLower())) &&
@@ -84,7 +84,7 @@ namespace brotherscase.Data
                 .AsNoTracking();
         }
 
-        private void ApplySort(ref IQueryable<Address> addresses, string orderByQueryString) 
+        private static void ApplySort(ref IQueryable<Address> addresses, string orderByQueryString) 
         { 
             if (!addresses.Any()) { return; }
 
