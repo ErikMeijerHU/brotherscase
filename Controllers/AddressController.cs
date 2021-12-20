@@ -25,15 +25,39 @@ namespace brotherscase.Controllers
             _repository = new AddressRepository(context);
         }
 
-        // GET: api/Address
+        /// <summary>
+        /// Measures distance between two addresses in Kilometers.
+        /// </summary>
+        /// <param name="firstAddressId">Example: 5</param>
+        /// <param name="secondAddressId">Example: 7</param>
+        /// <returns></returns>
+        [HttpGet("{firstAddressId}/{secondAddressId}")]
+        public async Task<ActionResult<double>> GetDistance(int firstAddressId, int secondAddressId)
+        {
+            var firstAddress = await _context.Address.FindAsync(firstAddressId);
+            var secondAddress = await _context.Address.FindAsync(secondAddressId);
+
+            if (firstAddress == null || secondAddress == null)
+            {
+                return NotFound();
+            }
+
+            return _repository.GetDistanceInKilometers(firstAddress, secondAddress);
+        }
+
+        /// <summary>
+        /// Retrieves all Addresses in database.
+        /// </summary>
+        /// <remarks>Parameters are for filtering, leave empty to retrieve all.<br />
+        /// OrderBy is for sorting.</remarks>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Address>>> GetAddress([FromQuery] AddressParameters addressParameters)
         {
-            return await _repository.GetAddresses(addressParameters).ToListAsync();
-            
+            return await _repository.GetAddresses(addressParameters).ToListAsync();            
         }
-
-        // GET: api/Address/5
+        /// <summary>
+        /// Retrieve Address with specific ID.
+        /// </summary>
         [HttpGet("{id}")]
         public async Task<ActionResult<Address>> GetAddress(int id)
         {
@@ -47,7 +71,9 @@ namespace brotherscase.Controllers
             return address;
         }
 
-        // PUT: api/Address/5
+        /// <summary>
+        /// Update existing Address.
+        /// </summary>
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAddress(int id, Address address)
         {
@@ -77,17 +103,21 @@ namespace brotherscase.Controllers
             return NoContent();
         }
 
-        // POST: api/Address
+        /// <summary>
+        /// Create new Address.
+        /// </summary>
         [HttpPost]
         public async Task<ActionResult<Address>> PostAddress(Address address)
         {
             _context.Address.Add(address);
             await _context.SaveChangesAsync();
-
+                         
             return CreatedAtAction("GetAddress", new { id = address.AddressId }, address);
         }
 
-        // DELETE: api/Address/5
+        /// <summary>
+        /// Delete an Address.
+        /// </summary>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAddress(int id)
         {
@@ -102,6 +132,7 @@ namespace brotherscase.Controllers
 
             return NoContent();
         }
+
 
         private bool AddressExists(int id)
         {

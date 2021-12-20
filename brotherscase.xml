@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>brotherscase</name>
+    </assembly>
+    <members>
+        <member name="M:brotherscase.Controllers.AddressController.GetDistance(System.Int32,System.Int32)">
+            <summary>
+            Measures distance between two addresses in Kilometers.
+            </summary>
+            <param name="firstAddressId">Example: 5</param>
+            <param name="secondAddressId">Example: 7</param>
+            <returns></returns>
+        </member>
+        <member name="M:brotherscase.Controllers.AddressController.GetAddress(brotherscase.Models.AddressParameters)">
+            <summary>
+            Retrieves all Addresses in database.
+            </summary>
+            <remarks>Parameters are for filtering, leave empty to retrieve all.<br />
+            OrderBy is for sorting.</remarks>
+        </member>
+        <member name="M:brotherscase.Controllers.AddressController.GetAddress(System.Int32)">
+            <summary>
+            Retrieve Address with specific ID.
+            </summary>
+        </member>
+        <member name="M:brotherscase.Controllers.AddressController.PutAddress(System.Int32,brotherscase.Address)">
+            <summary>
+            Update existing Address.
+            </summary>
+        </member>
+        <member name="M:brotherscase.Controllers.AddressController.PostAddress(brotherscase.Address)">
+            <summary>
+            Create new Address.
+            </summary>
+        </member>
+        <member name="M:brotherscase.Controllers.AddressController.DeleteAddress(System.Int32)">
+            <summary>
+            Delete an Address.
+            </summary>
+        </member>
+        <member name="P:brotherscase.Models.AddressParameters.Street">
+            <summary>Example: Heidelberglaan</summary>
+        </member>
+        <member name="P:brotherscase.Models.AddressParameters.HouseNumber">
+            <summary>Example: 15</summary>
+        </member>
+        <member name="P:brotherscase.Models.AddressParameters.PostalCode">
+            <summary>Example: 3584CS</summary>
+        </member>
+        <member name="P:brotherscase.Models.AddressParameters.Town">
+            <summary>Example: Utrecht</summary>
+        </member>
+        <member name="P:brotherscase.Models.AddressParameters.Country">
+            <summary>Example: Nederland</summary>
+        </member>
+        <member name="P:brotherscase.Models.AddressParameters.OrderBy">
+            <summary>Example: housenumber desc,street</summary>
+        </member>
+    </members>
+</doc>

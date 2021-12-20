@@ -24,5 +24,10 @@ namespace brotherscase
         public string Town { get; set; }
 
         public string Country { get; set; }
+
+        public override string ToString() 
+        {
+            return this.Street + " " + this.HouseNumber + ", " + this.PostalCode + " " + this.Town + ", " + this.Country;
+        }
     }
 }

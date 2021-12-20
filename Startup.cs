@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -35,6 +36,9 @@ namespace brotherscase
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "brotherscase", Version = "v1" });
                 c.EnableAnnotations();
+
+                var filePath = Path.Combine(System.AppContext.BaseDirectory, "brotherscase.xml");
+                c.IncludeXmlComments(filePath);
             });
         }
 
